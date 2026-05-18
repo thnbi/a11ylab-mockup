@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+/* ============================================================
+   A11yLAB Design Tokens — derived from /DESIGN.md (Dodger Estúdio)
+   Edit DESIGN.md first, then mirror changes here.
+   ============================================================ */
+@theme {
+  /* Spacing: usamos o default de Tailwind (0.25rem) — escala de 8px do
+     DESIGN.md mapeia para os múltiplos pares: p-2 = 8px (sm), p-4 = 16px (md),
+     p-6 = 24px (lg), p-8 = 32px (xl). */
+
+  /* Fonts */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Consolas, monospace;
+
+  /* Colors — Dodger (primary, "ação") */
+  --color-dodger-50: #EFF7FF;
+  --color-dodger-100: #D9ECFF;
+  --color-dodger-200: #B3D8FF;
+  --color-dodger-300: #7CBEFF;
+  --color-dodger-400: #46A4FF;
+  --color-dodger-500: #1E90FF;
+  --color-dodger-600: #1573D6;
+  --color-dodger-700: #0F58A8;
+  --color-dodger-800: #0B4180;
+  --color-dodger-900: #072C5C;
+
+  /* Colors — Violeta (secondary, "progresso") */
+  --color-violeta-50: #F5F0FF;
+  --color-violeta-100: #EADDFF;
+  --color-violeta-200: #D4BAFF;
+  --color-violeta-300: #B895FA;
+  --color-violeta-400: #9A6FF0;
+  --color-violeta-500: #7C3AED;
+  --color-violeta-600: #6A2BD1;
+  --color-violeta-700: #5520A8;
+  --color-violeta-800: #3F1880;
+  --color-violeta-900: #2A1057;
+
+  /* Colors — Âmbar (XP / recompensa) */
+  --color-ambar-50: #FFF8E6;
+  --color-ambar-100: #FDECC8;
+  --color-ambar-300: #FBC56B;
+  --color-ambar-500: #F59E0B;
+  --color-ambar-700: #B97509;
+
+  /* Colors — Teal (acento secundário) */
+  --color-teal-50: #E6FAF7;
+  --color-teal-100: #C4F1EA;
+  --color-teal-500: #14B8A6;
+  --color-teal-700: #0E8175;
+
+  /* Colors — Sucesso */
+  --color-sucesso-50: #E6F8F1;
+  --color-sucesso-100: #C7EFDD;
+  --color-sucesso-500: #10B981;
+  --color-sucesso-700: #0B7F5A;
+
+  /* Colors — Erro */
+  --color-erro-50: #FDECEC;
+  --color-erro-100: #FAD0D0;
+  --color-erro-500: #EF4444;
+  --color-erro-700: #B5292A;
+
+  /* Colors — Superfície e texto */
+  --color-surface: #FAFCFF;
+  --color-surface-raised: #FFFFFF;
+  --color-surface-sunken: #F1F5FB;
+  --color-ink: #1E293B;
+  --color-ink-strong: #0B1424;
+  --color-ink-muted: #475569;
+  --color-ink-subtle: #64748B;
+  --color-ink-disabled: #94A3B8;
+  --color-ink-on-dark: #FAFCFF;
+  --color-border: #E2E8F0;
+  --color-border-strong: #CBD5E1;
+
+  /* Colors — Apelidos semânticos */
+  --color-primary: #1E90FF;
+  --color-primary-hover: #1573D6;
+  --color-secondary: #7C3AED;
+  --color-secondary-hover: #6A2BD1;
+  --color-accent-xp: #F59E0B;
+
+  /* Border radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 10px 24px rgba(15, 23, 42, 0.10);
+
+  /* Typography — composite sizes (size + line-height + tracking + weight) */
+  --text-display: 40px;
+  --text-display--line-height: 1.15;
+  --text-display--letter-spacing: -0.02em;
+  --text-display--font-weight: 700;
+
+  --text-h1: 32px;
+  --text-h1--line-height: 1.2;
+  --text-h1--letter-spacing: -0.015em;
+  --text-h1--font-weight: 700;
+
+  --text-h2: 24px;
+  --text-h2--line-height: 1.25;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h2--font-weight: 600;
+
+  --text-h3: 20px;
+  --text-h3--line-height: 1.3;
+  --text-h3--font-weight: 600;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.6;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 1.6;
+
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 1.55;
+
+  --text-label-md: 14px;
+  --text-label-md--line-height: 1.4;
+  --text-label-md--font-weight: 500;
+
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 1.3;
+  --text-label-sm--letter-spacing: 0.02em;
+  --text-label-sm--font-weight: 500;
+
+  --text-caps: 11px;
+  --text-caps--line-height: 1.2;
+  --text-caps--letter-spacing: 0.08em;
+  --text-caps--font-weight: 600;
+}
+
+/* ============================================================
+   Base: aplicar tokens + a11y essencial (focus visível, motion)
+   ============================================================ */
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    margin: 0;
+    min-height: 100svh;
+  }
+
+  /* Headings usam Plus Jakarta Sans por padrão */
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    color: var(--color-ink-strong);
+  }
+
+  /* Focus ring obrigatório (WCAG 2.4.7) — a plataforma ensina isso, então a UI exemplifica */
+  *:focus-visible {
+    outline: 3px solid var(--color-dodger-500);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Respeita usuários que preferem menos movimento */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
