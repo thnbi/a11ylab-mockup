@@ -8,11 +8,36 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Atkinson+Hyperlegible:wght@400;700&display=swap"
       rel="stylesheet"
     />
 
     <title>A11yLAB — Laboratório de Acessibilidade</title>
+
+    <script>
+      // Anti-FOUC: aplica preferências do usuário no <html> antes do React
+      // montar. Lê do localStorage; se ausente, segue prefers-color-scheme.
+      (function () {
+        try {
+          var root = document.documentElement;
+          var stored = localStorage.getItem('a11ylab.preferences');
+          var prefs = stored ? JSON.parse(stored) : {};
+
+          var theme = prefs.theme || 'sistema';
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (theme === 'escuro' || (theme === 'sistema' && prefersDark)) {
+            root.classList.add('dark');
+          }
+
+          if (prefs.fontScale != null) root.setAttribute('data-font-scale', String(prefs.fontScale));
+          if (prefs.altoContraste) root.setAttribute('data-contrast', 'alto');
+          if (prefs.reduzirMovimento) root.setAttribute('data-reduce-motion', 'forcar');
+          if (prefs.fonteDislexia) root.setAttribute('data-font', 'dislexia');
+        } catch (e) {
+          // localStorage indisponível ou JSON inválido — segue defaults
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -24,12 +24,12 @@ const perfil = {
 
 export default function PerfilScreen() {
   return (
-    <div className="max-w-[900px] mx-auto px-10 py-8">
+    <div className="max-w-[1200px] mx-auto px-10 py-8">
       <header className="mb-8">
         <h1 className="text-display text-ink-strong">Perfil</h1>
       </header>
 
-      <section className="mb-10">
+      <section className="mb-10 max-w-3xl">
         <h2 className="text-h2 text-ink-strong mb-4">Dados pessoais</h2>
         <div className="bg-surface-raised border border-border rounded-lg p-6 space-y-5">
           <FormField label="Nome" Icon={UserIcon} type="text" defaultValue={perfil.nome} />
@@ -46,7 +46,7 @@ export default function PerfilScreen() {
         </div>
       </section>
 
-      <section>
+      <section className="max-w-3xl">
         <h2 className="text-h2 text-ink-strong mb-4">Histórico de trilhas</h2>
         <ul className="space-y-3">
           {perfil.historicoTrilhas.map((t) => (

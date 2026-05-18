@@ -1,14 +1,21 @@
 @import "tailwindcss";
 
 /* ============================================================
-   A11yLAB Design Tokens — derived from /DESIGN.md (Dodger Estúdio)
-   Edit DESIGN.md first, then mirror changes here.
+   Dark mode opt-in via classe `.dark` no <html>.
+   Sintaxe Tailwind v4 — `@custom-variant` registra o seletor.
+   ============================================================ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================
+   A11yLAB Design Tokens — derivados de /DESIGN.md (Dodger Estúdio)
+   Edite DESIGN.md primeiro, depois espelhe aqui.
+
+   Os tamanhos de texto estão em rem para respeitarem o
+   font-size do <html> — habilita zoom de navegador e o
+   controle de tamanho de fonte do painel de Acessibilidade.
+   Base: 1rem = 16px (light scale "padrão").
    ============================================================ */
 @theme {
-  /* Spacing: usamos o default de Tailwind (0.25rem) — escala de 8px do
-     DESIGN.md mapeia para os múltiplos pares: p-2 = 8px (sm), p-4 = 16px (md),
-     p-6 = 24px (lg), p-8 = 32px (xl). */
-
   /* Fonts */
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-display: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -54,6 +61,7 @@
   /* Colors — Sucesso */
   --color-sucesso-50: #E6F8F1;
   --color-sucesso-100: #C7EFDD;
+  --color-sucesso-200: #9CE0C0;
   --color-sucesso-500: #10B981;
   --color-sucesso-700: #0B7F5A;
 
@@ -94,48 +102,165 @@
   --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
   --shadow-lg: 0 10px 24px rgba(15, 23, 42, 0.10);
 
-  /* Typography — composite sizes (size + line-height + tracking + weight) */
-  --text-display: 40px;
+  /* Typography — sizes em rem (escalam com font-size do html) */
+  --text-display: 2.5rem;          /* 40px */
   --text-display--line-height: 1.15;
   --text-display--letter-spacing: -0.02em;
   --text-display--font-weight: 700;
 
-  --text-h1: 32px;
+  --text-h1: 2rem;                 /* 32px */
   --text-h1--line-height: 1.2;
   --text-h1--letter-spacing: -0.015em;
   --text-h1--font-weight: 700;
 
-  --text-h2: 24px;
+  --text-h2: 1.5rem;               /* 24px */
   --text-h2--line-height: 1.25;
   --text-h2--letter-spacing: -0.01em;
   --text-h2--font-weight: 600;
 
-  --text-h3: 20px;
+  --text-h3: 1.25rem;              /* 20px */
   --text-h3--line-height: 1.3;
   --text-h3--font-weight: 600;
 
-  --text-body-lg: 18px;
+  --text-body-lg: 1.125rem;        /* 18px */
   --text-body-lg--line-height: 1.6;
 
-  --text-body-md: 16px;
+  --text-body-md: 1rem;            /* 16px */
   --text-body-md--line-height: 1.6;
 
-  --text-body-sm: 14px;
+  --text-body-sm: 0.875rem;        /* 14px */
   --text-body-sm--line-height: 1.55;
 
-  --text-label-md: 14px;
+  --text-label-md: 0.875rem;       /* 14px */
   --text-label-md--line-height: 1.4;
   --text-label-md--font-weight: 500;
 
-  --text-label-sm: 12px;
+  --text-label-sm: 0.75rem;        /* 12px */
   --text-label-sm--line-height: 1.3;
   --text-label-sm--letter-spacing: 0.02em;
   --text-label-sm--font-weight: 500;
 
-  --text-caps: 11px;
+  --text-caps: 0.6875rem;          /* 11px */
   --text-caps--line-height: 1.2;
   --text-caps--letter-spacing: 0.08em;
   --text-caps--font-weight: 600;
+}
+
+/* ============================================================
+   Dark mode — espelhamento da escala de cores.
+   Sobrescreve as CSS vars do @theme quando .dark está no <html>.
+   Estratégia: cada shade -N vira o shade -(1000-N) da escala
+   original, mantendo coerência tonal. Surface invertida.
+   ============================================================ */
+.dark {
+  /* Dodger — espelhada */
+  --color-dodger-50: #072C5C;
+  --color-dodger-100: #0B4180;
+  --color-dodger-200: #0F58A8;
+  --color-dodger-300: #1573D6;
+  --color-dodger-400: #46A4FF;
+  --color-dodger-500: #1E90FF;
+  --color-dodger-600: #46A4FF;
+  --color-dodger-700: #7CBEFF;
+  --color-dodger-800: #B3D8FF;
+  --color-dodger-900: #D9ECFF;
+
+  /* Violeta — espelhada */
+  --color-violeta-50: #2A1057;
+  --color-violeta-100: #3F1880;
+  --color-violeta-200: #5520A8;
+  --color-violeta-300: #6A2BD1;
+  --color-violeta-400: #9A6FF0;
+  --color-violeta-500: #7C3AED;
+  --color-violeta-600: #9A6FF0;
+  --color-violeta-700: #B895FA;
+  --color-violeta-800: #D4BAFF;
+  --color-violeta-900: #EADDFF;
+
+  /* Âmbar — calibrada manual (escala curta) */
+  --color-ambar-50: #2D1F08;
+  --color-ambar-100: #4D3510;
+  --color-ambar-300: #B97509;
+  --color-ambar-500: #F59E0B;
+  --color-ambar-700: #FBC56B;
+
+  /* Teal */
+  --color-teal-50: #062A26;
+  --color-teal-100: #093F39;
+  --color-teal-500: #14B8A6;
+  --color-teal-700: #5EEAD4;
+
+  /* Sucesso */
+  --color-sucesso-50: #07291E;
+  --color-sucesso-100: #0B3F2E;
+  --color-sucesso-200: #0F5640;
+  --color-sucesso-500: #10B981;
+  --color-sucesso-700: #6EE7B7;
+
+  /* Erro */
+  --color-erro-50: #2D0E0E;
+  --color-erro-100: #4D1A1A;
+  --color-erro-500: #EF4444;
+  --color-erro-700: #FCA5A5;
+
+  /* Surface e texto — invertidos */
+  --color-surface: #0B1424;
+  --color-surface-raised: #131F36;
+  --color-surface-sunken: #060D1A;
+  --color-ink: #E2E8F0;
+  --color-ink-strong: #F8FAFC;
+  --color-ink-muted: #A3B0C2;       /* mais claro que slate-400 para AA sobre raised */
+  --color-ink-subtle: #94A3B8;
+  --color-ink-disabled: #64748B;
+  --color-ink-on-dark: #F8FAFC;     /* texto sobre botão primário (-500) — sempre claro */
+  --color-border: #1E293B;
+  --color-border-strong: #334155;
+
+  /* Sombras em dark — mais sutis (já há contraste por luminância) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* ============================================================
+   data-contrast="alto" — modo de contraste reforçado
+   Texto secundário vira igual ao texto forte; bordas ganham
+   intensidade; remove transparências sutis.
+   ============================================================ */
+:root[data-contrast="alto"] {
+  --color-ink-muted: var(--color-ink-strong);
+  --color-ink-subtle: var(--color-ink-strong);
+  --color-ink-disabled: var(--color-ink-muted);
+  --color-border: var(--color-border-strong);
+}
+
+/* ============================================================
+   data-font-scale — controle de tamanho de fonte
+   Todos os tokens de texto estão em rem, então alterar
+   o font-size raiz escala a UI inteira proporcionalmente.
+   ============================================================ */
+:root[data-font-scale="0"] { font-size: 87.5%; }   /* Pequeno (14px) */
+:root[data-font-scale="1"] { font-size: 100%; }    /* Padrão (16px) */
+:root[data-font-scale="2"] { font-size: 112.5%; }  /* Grande (18px) */
+:root[data-font-scale="3"] { font-size: 125%; }    /* Maior (20px) */
+
+/* ============================================================
+   data-reduce-motion="forcar" — override do usuário, ignora OS
+   ============================================================ */
+:root[data-reduce-motion="forcar"] *,
+:root[data-reduce-motion="forcar"] *::before,
+:root[data-reduce-motion="forcar"] *::after {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* ============================================================
+   data-font="dislexia" — substitui família por Atkinson
+   Hyperlegible, otimizada para baixa visão.
+   ============================================================ */
+:root[data-font="dislexia"] {
+  --font-sans: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --font-display: "Atkinson Hyperlegible", system-ui, sans-serif;
 }
 
 /* ============================================================
@@ -154,9 +279,9 @@
     color: var(--color-ink);
     margin: 0;
     min-height: 100svh;
+    transition: background-color 200ms ease, color 200ms ease;
   }
 
-  /* Headings usam Plus Jakarta Sans por padrão */
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     color: var(--color-ink-strong);
@@ -175,5 +300,53 @@
       animation-duration: 0.01ms !important;
       transition-duration: 0.01ms !important;
     }
+  }
+
+  /* Cursor pointer em todos os elementos interativos.
+     Tailwind v4 removeu o cursor: pointer default em <button> — restauramos
+     para a UI inteira em vez de espalhar a classe em cada componente. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="radio"]:not([aria-disabled="true"]),
+  [role="switch"]:not([aria-disabled="true"]),
+  [role="tab"]:not([aria-disabled="true"]),
+  a[href],
+  label[for],
+  summary,
+  select {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+
+  /* Reset do <dialog> nativo.
+     Para centralização confiável: em modal mode o <dialog> ocupa a
+     viewport inteira como um flex container, e o conteúdo interno
+     (o card do modal) é centralizado via align/justify. Isso evita
+     depender do `margin: auto` do UA stylesheet, que comporta-se
+     inconsistente entre browsers quando há max-width/padding. */
+  dialog {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: inherit;
+  }
+  dialog:modal {
+    margin: 0;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  dialog::backdrop {
+    background-color: rgba(11, 20, 36, 0.55);
+    backdrop-filter: blur(2px);
   }
 }
