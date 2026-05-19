@@ -122,7 +122,7 @@ export default function PathScreen({ onAbrirTrilha }) {
   const rows = chunkArray(waypoints, ITEMS_PER_ROW)
 
   return (
-    <div className="max-w-[1280px] mx-auto px-8 py-8">
+    <div className="max-w-[1200px] mx-auto px-10 py-8">
       <PathHeader />
       <div className="mt-10">
         {rows.map((rowItems, rowIdx) => {
@@ -153,10 +153,10 @@ function PathHeader() {
     <header className="flex items-end justify-between gap-6 flex-wrap">
       <div className="flex-1 min-w-0">
         <h1 className="text-display text-ink-strong">
-          Não sabe por onde começar?
+          Boas-vindas ao Ally! 
         </h1>
         <p className="mt-2 text-body-lg text-ink-muted max-w-2xl">
-          Siga a trilha sugerida abaixo — do zero até dominar acessibilidade web.
+          Não sabe por onde começar? Siga a trilha sugerida abaixo: do zero até dominar acessibilidade web.
         </p>
       </div>
       <div className="relative w-full md:w-80">
@@ -228,7 +228,7 @@ function DashedConnector() {
    correspondente — alinha exatamente com o centro do primeiro item da
    próxima row, independente da largura do viewport. */
 function InterRowConnector({ side }) {
-  const pos = side === 'right' ? { right: 95 } : { left: 95 }
+  const pos = side === 'right' ? { right: 90 } : { left: 90 }
   return (
     <div className="h-12 w-full relative" aria-hidden="true">
       <div
@@ -275,7 +275,7 @@ function TopicWaypoint({ titulo, subtitulo, status, progresso, onClick }) {
     : 'transition-colors'
 
   return (
-    <li className="list-none shrink-0 w-[200px]">
+    <li className="list-none shrink-0 w-[180px]">
       <Wrapper
         {...props}
         className={`w-full h-full text-left flex flex-col gap-2 p-4 rounded-lg border-2 ${v.bg} ${v.border} ${v.ring} ${interactive}`}
@@ -331,7 +331,7 @@ function NodeStatusRow({ status, progresso }) {
 function ReviewWaypoint({ sectionTitle, status }) {
   const unlocked = status === 'concluido'
   return (
-    <li className="list-none shrink-0 w-[190px]">
+    <li className="list-none shrink-0 w-[180px]">
       <article className="w-full h-full flex items-center relative">
         <div
           aria-hidden="true"

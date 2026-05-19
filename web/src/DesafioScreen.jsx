@@ -200,8 +200,10 @@ function Evidencia() {
           <span className="w-2 h-2 rounded-full bg-sucesso-500" />
         </span>
       </header>
+      {/* Canvas mantém paleta clara fixa em ambos os temas: representa o
+          componente "no mundo real" sendo inspecionado, não a UI da app. */}
       <div className="flex-1 bg-white px-10 py-12 flex flex-col items-center justify-center">
-        <p className="font-mono text-body-sm text-ink-muted mb-6">
+        <p className="font-mono text-body-sm mb-6" style={{ color: '#475569' }}>
           Finalize seu pedido para receber em casa:
         </p>
         {/* O "vilão" do desafio: botão real com baixo contraste */}
@@ -212,7 +214,7 @@ function Evidencia() {
         >
           Confirmar pedido
         </button>
-        <p className="mt-8 font-mono text-label-sm text-ink-disabled">
+        <p className="mt-8 font-mono text-label-sm" style={{ color: '#94A3B8' }}>
           contrast ratio: 1.6:1
         </p>
       </div>

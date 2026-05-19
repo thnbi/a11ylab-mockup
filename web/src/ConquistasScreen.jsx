@@ -88,7 +88,7 @@ export default function ConquistasScreen() {
   const proximaMedalha = conquistasPontuacao.find((m) => xpAtual < m.xp)
 
   return (
-    <div className="max-w-[1080px] mx-auto px-10 py-8">
+    <div className="max-w-[1200px] mx-auto px-10 py-8">
       <header className="mb-2">
         <h1 className="text-display text-ink-strong">Minhas conquistas</h1>
         <p className="mt-2 text-body-md text-ink-muted">

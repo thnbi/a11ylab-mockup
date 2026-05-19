@@ -24,7 +24,7 @@ export default function TrilhaScreen({ onIniciar, onVoltarRoadmap }) {
   const percentual = (trilha.completos / trilha.desafios) * 100
 
   return (
-    <div className="max-w-[1080px] mx-auto px-10 py-8">
+    <div className="max-w-[1200px] mx-auto px-10 py-8">
       {onVoltarRoadmap && (
         <button
           type="button"
