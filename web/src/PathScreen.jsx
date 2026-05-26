@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 import { sections, ICON_MAP } from './data/trilhas'
 import { useProgress } from './contexts/ProgressContext'
+import { useAuth } from './contexts/AuthContext'
 import { getTrilha } from './data/helpers'
 import { Tag } from './components/ui'
 
@@ -64,6 +65,25 @@ function normalizar(s) {
     .toLowerCase()
     .normalize('NFD')
     .replace(/[̀-ͯ]/g, '')
+}
+
+const SUBTITULOS_HOME = [
+  'Pronto pra destravar mais um tópico?',
+  'Bora aprender algo novo hoje?',
+  'Sua próxima conquista te espera. ✨',
+  'Que tal continuar de onde parou?',
+]
+
+function saudacaoPorHora(h) {
+  if (h < 5) return 'Boa madrugada'
+  if (h < 12) return 'Bom dia'
+  if (h < 18) return 'Boa tarde'
+  return 'Boa noite'
+}
+
+function primeiroNome(nome) {
+  if (!nome) return null
+  return nome.trim().split(/\s+/)[0]
 }
 
 export default function PathScreen({ onAbrirTrilha, onAbrirEmBreve }) {
@@ -138,13 +158,33 @@ export default function PathScreen({ onAbrirTrilha, onAbrirEmBreve }) {
 
 /* ---------- Header ----------------------------------------------- */
 function PathHeader({ q, onChange }) {
+  const { user } = useAuth()
+  const nome = primeiroNome(user?.nome)
+  // Saudação calculada na montagem; evita re-render trocar o texto a cada keystroke
+  // da busca. Em uma sessão curta, a saudação não muda de período de qualquer jeito.
+  const { saudacao, subtitulo } = useMemo(() => {
+    const agora = new Date()
+    const h = agora.getHours()
+    // Index estável dentro do dia, evita trocar de frase em re-renders.
+    const diaDoAno = Math.floor(
+      (agora - new Date(agora.getFullYear(), 0, 0)) / 86400000
+    )
+    return {
+      saudacao: saudacaoPorHora(h),
+      subtitulo: SUBTITULOS_HOME[diaDoAno % SUBTITULOS_HOME.length],
+    }
+  }, [])
   return (
     <header className="flex items-end justify-between gap-6 flex-wrap">
       <div className="flex-1 min-w-0">
-        <h1 className="text-display text-ink-strong">Boas-vindas ao Ally!</h1>
+        <h1 className="text-display text-ink-strong">
+          {saudacao}{nome ? `, ${nome}` : ''}!{' '}
+          <span aria-hidden="true" className="inline-block motion-safe:animate-wave origin-[70%_70%]">👋</span>
+        </h1>
         <p className="mt-2 text-body-lg text-ink-muted max-w-2xl">
-          Comece por <strong className="text-ink-strong">qualquer</strong> tópico
-          do roadmap. Não há ordem obrigatória, explore livremente.
+          {subtitulo} Comece por{' '}
+          <strong className="text-ink-strong">qualquer</strong> tópico do
+          roadmap, sem ordem obrigatória.
         </p>
       </div>
       <div className="relative w-full md:w-80">
@@ -168,23 +208,32 @@ function PathHeader({ q, onChange }) {
 
 function EmptySearchState({ query, onLimpar }) {
   return (
-    <div className="mt-16 flex flex-col items-center text-center gap-3">
-      <span
-        aria-hidden="true"
-        className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-surface-sunken border border-border"
-      >
-        <SearchX size={28} className="text-ink-muted" strokeWidth={2} />
-      </span>
-      <h2 className="text-h2 text-ink-strong">Nenhum tópico encontrado</h2>
+    <div className="mt-16 flex flex-col items-center text-center gap-4">
+      <div className="relative">
+        <span
+          aria-hidden="true"
+          className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-violeta-50 ring-8 ring-violeta-100 motion-safe:animate-float"
+        >
+          <img src="/logo-olhos.png" alt="" className="w-14 h-auto" />
+        </span>
+        <span
+          aria-hidden="true"
+          className="absolute -top-2 -right-3 inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-raised border-2 border-violeta-200 shadow-sm"
+        >
+          <SearchX size={16} className="text-violeta-700" strokeWidth={2.4} />
+        </span>
+      </div>
+      <h2 className="text-h2 text-ink-strong">Hmm, não achei nada por aqui…</h2>
       <p className="text-body-md text-ink-muted max-w-md">
-        Nada corresponde a "{query}". Tente outra palavra-chave ou veja todo o roadmap.
+        Nada bate com <strong className="text-ink-strong">"{query}"</strong>.
+        Que tal tentar <em>"cor"</em>, <em>"foco"</em> ou <em>"teclado"</em>?
       </p>
       <button
         type="button"
         onClick={onLimpar}
-        className="mt-2 text-label-md font-semibold text-dodger-700 hover:text-dodger-600"
+        className="mt-1 text-label-md font-semibold text-dodger-700 hover:text-dodger-600 underline-offset-4 hover:underline"
       >
-        Limpar busca
+        Limpar busca e ver tudo
       </button>
     </div>
   )

@@ -204,6 +204,7 @@ export default function DesafioScreen({
           ehUltima={ehUltima}
           ehGameOver={proximaAcaoEhGameOver}
           onAvancar={handleAvancar}
+          perguntaId={pergunta.id}
         />
       )}
 
@@ -414,6 +415,30 @@ function EvidenciaFrame({ evidenciaId }) {
 }
 
 /* ============================================================
+   Frases de incentivo, escolhidas de forma estável por pergunta.
+   Não usamos Math.random no render para evitar troca de texto a
+   cada re-render (ex.: ao mexer no estado xpBurst).
+   ============================================================ */
+const FRASES_ACERTO = [
+  'Mandou bem! Olha só por que isso importa…',
+  'Isso aí! Você pegou a ideia.',
+  'Boa! Esse é o caminho.',
+  'Show de bola! Segue assim.',
+]
+const FRASES_ERRO = [
+  'Sem stress, vamos entender juntos!',
+  'Errar faz parte — bora destrinchar.',
+  'Quase! Olha só a explicação.',
+  'Calma, isso aqui pega muita gente.',
+]
+function frasePorId(arr, id) {
+  const s = String(id ?? '')
+  let h = 0
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0
+  return arr[h % arr.length]
+}
+
+/* ============================================================
    Painel de feedback após confirmar
    ============================================================ */
 function Feedback({
@@ -424,12 +449,17 @@ function Feedback({
   ehUltima,
   ehGameOver,
   onAvancar,
+  perguntaId,
 }) {
   const labelBotao = ehGameOver
     ? 'Ver resultado'
     : ehUltima
     ? 'Concluir desafio'
     : 'Próxima pergunta'
+
+  const fraseIncentivo = acertou
+    ? frasePorId(FRASES_ACERTO, perguntaId)
+    : frasePorId(FRASES_ERRO, perguntaId)
 
   return (
     <section
@@ -468,9 +498,7 @@ function Feedback({
               acertou ? 'text-sucesso-700' : 'text-erro-700'
             }`}
           >
-            {acertou
-              ? 'Mandou bem! Olha só por que isso importa…'
-              : 'Sem stress, vamos entender juntos!'}
+            {fraseIncentivo}
           </p>
         </div>
       </header>
@@ -491,11 +519,61 @@ function Mascote({ acertou }) {
       className={`
         shrink-0 inline-flex items-center justify-center
         w-20 h-20 rounded-full bg-white shadow-sm
-        ring-4 ${acertou ? 'ring-sucesso-200' : 'ring-erro-200'}
+        ring-4 ${acertou ? 'ring-sucesso-200 motion-safe:animate-cheer-bounce' : 'ring-erro-200 motion-safe:animate-sad-wobble'}
       `}
     >
       <img src="/logo-olhos.png" alt="" className="w-12 h-auto" />
     </span>
+  )
+}
+
+/* ============================================================
+   Confete CSS-only, partículas posicionadas em ângulos diferentes
+   caindo do topo da tela. Sem libs externas, sem JS de animação.
+   `aria-hidden`: decoração — a conclusão já tem texto e XP visíveis.
+   ============================================================ */
+const CONFETTI_CORES = [
+  'var(--color-ambar-500)',
+  'var(--color-dodger-500)',
+  'var(--color-violeta-500)',
+  'var(--color-sucesso-500)',
+  'var(--color-teal-500)',
+]
+function Confetti({ count = 24 }) {
+  const pecas = useMemo(
+    () =>
+      Array.from({ length: count }, (_, i) => ({
+        left: (i * 100) / count + (i % 3) * 2,
+        delay: (i % 7) * 0.12,
+        duration: 2.2 + (i % 5) * 0.25,
+        cor: CONFETTI_CORES[i % CONFETTI_CORES.length],
+        rotate: (i * 47) % 360,
+        size: 6 + (i % 4) * 2,
+      })),
+    [count]
+  )
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 z-40 overflow-hidden motion-reduce:hidden"
+    >
+      {pecas.map((p, i) => (
+        <span
+          key={i}
+          className="absolute top-[-20px] block motion-safe:animate-confetti-fall"
+          style={{
+            left: `${p.left}%`,
+            width: p.size,
+            height: p.size * 0.4,
+            background: p.cor,
+            transform: `rotate(${p.rotate}deg)`,
+            animationDelay: `${p.delay}s`,
+            animationDuration: `${p.duration}s`,
+            borderRadius: 2,
+          }}
+        />
+      ))}
+    </div>
   )
 }
 
@@ -520,14 +598,15 @@ function TelaConclusao({
     : 'Desafio concluído'
 
   return (
-    <div className="max-w-[800px] mx-auto px-10 py-12">
+    <div className="max-w-[800px] mx-auto px-10 py-12 relative">
+      {perfeito && <Confetti />}
       <div className="flex flex-col items-center text-center gap-5">
         <span
           aria-hidden="true"
           className={`
             inline-flex items-center justify-center w-28 h-28 rounded-full
             ${perfeito
-              ? 'bg-gradient-to-br from-ambar-500 to-violeta-500 text-white ring-8 ring-ambar-100'
+              ? 'bg-gradient-to-br from-ambar-500 to-violeta-500 text-white ring-8 ring-ambar-100 motion-safe:animate-cheer-bounce'
               : 'bg-sucesso-500 text-white ring-8 ring-sucesso-100'}
             shadow-lg
           `}
@@ -584,21 +663,42 @@ function TelaConclusao({
 /* ============================================================
    Tela de game over (vidas zeraram)
    ============================================================ */
+const FRASES_GAME_OVER = [
+  'Errar faz parte de aprender — e você já chegou longe.',
+  'Cada tentativa te aproxima do "ahá!" final.',
+  'Respira fundo, dá pra refazer com calma. ✨',
+  'Não é fracasso, é prática. Bora de novo?',
+]
+
 function TelaGameOver({ desafio, acertos, total, onTentarDeNovo, onVoltarTrilha }) {
+  const fraseIncentivo = useMemo(
+    () => frasePorId(FRASES_GAME_OVER, desafio.id),
+    [desafio.id]
+  )
   return (
     <div className="max-w-[700px] mx-auto px-10 py-16">
       <div className="flex flex-col items-center text-center gap-5">
-        <span
-          aria-hidden="true"
-          className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-erro-100 ring-8 ring-erro-50"
-        >
-          <Heart size={42} className="text-erro-500" strokeWidth={2.4} />
-        </span>
-        <h1 className="text-h1 text-ink-strong">Você ficou sem vidas</h1>
+        <div className="relative">
+          <span
+            aria-hidden="true"
+            className="inline-flex items-center justify-center w-28 h-28 rounded-full bg-white shadow-md ring-8 ring-violeta-100 motion-safe:animate-sad-wobble"
+          >
+            <img src="/logo-olhos.png" alt="" className="w-16 h-auto" />
+          </span>
+          <span
+            aria-hidden="true"
+            className="absolute -bottom-1 -right-1 inline-flex items-center justify-center w-10 h-10 rounded-full bg-erro-50 border-2 border-erro-100"
+          >
+            <Heart size={20} className="text-erro-500" strokeWidth={2.4} />
+          </span>
+        </div>
+        <h1 className="text-h1 text-ink-strong">Quase lá!</h1>
         <p className="text-body-lg text-ink-muted max-w-md">
           No <strong className="text-ink-strong">{desafio.titulo}</strong> você
-          acertou {acertos} de {total}. Cada erro é uma chance de aprender -
-          que tal tentar de novo?
+          acertou <strong className="text-ink-strong">{acertos} de {total}</strong>.
+        </p>
+        <p className="text-body-md text-violeta-700 font-semibold max-w-md">
+          {fraseIncentivo}
         </p>
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
           <Button variant="secondary" onClick={onVoltarTrilha}>

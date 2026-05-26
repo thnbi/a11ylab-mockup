@@ -395,6 +395,67 @@
   animation: pop-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Aceno de mão na saudação da home — gesto sutil, repete poucas vezes. */
+@keyframes wave {
+  0%, 60%, 100% { transform: rotate(0); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+}
+.animate-wave {
+  animation: wave 2.4s ease-in-out 0.5s 2;
+  transform-origin: 70% 70%;
+  display: inline-block;
+}
+
+/* Flutuar suave, usado em elementos de empty state para dar vida. */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.animate-float {
+  animation: float 3.4s ease-in-out infinite;
+}
+
+/* Bounce comemorativo, usado no mascote ao acertar e no troféu da
+   tela de conclusão perfeita. Curto e expressivo. */
+@keyframes cheer-bounce {
+  0%   { transform: translateY(0) scale(1); }
+  25%  { transform: translateY(-10px) scale(1.06); }
+  50%  { transform: translateY(0) scale(0.98); }
+  70%  { transform: translateY(-4px) scale(1.02); }
+  100% { transform: translateY(0) scale(1); }
+}
+.animate-cheer-bounce {
+  animation: cheer-bounce 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Wobble triste, sutil — usado no mascote quando o usuário erra.
+   Não é punitivo: balança leve e para. */
+@keyframes sad-wobble {
+  0%, 100% { transform: rotate(0); }
+  25%      { transform: rotate(-4deg); }
+  75%      { transform: rotate(4deg); }
+}
+.animate-sad-wobble {
+  animation: sad-wobble 0.6s ease-in-out;
+}
+
+/* Confete caindo do topo, partículas distintas via inline style. */
+@keyframes confetti-fall {
+  0%   { transform: translateY(0) rotate(0); opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+.animate-confetti-fall {
+  animation-name: confetti-fall;
+  animation-timing-function: cubic-bezier(0.16, 0.7, 0.5, 1);
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
 /* Pulse do contador de XP, chama atenção quando o valor sobe. */
 @keyframes xp-counter-pulse {
   0%   { transform: scale(1);    color: var(--color-ink-strong); }

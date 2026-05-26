@@ -88,6 +88,7 @@ export default function App() {
               topicoTitulo={trilhaTela.topico.titulo}
               topicoSubtitulo={trilhaTela.topico.subtitulo}
               onVoltarRoadmap={() => setTrilhaTela({ nome: 'path' })}
+              onAbrirTrilha={(trilhaId) => setTrilhaTela({ nome: 'trilha', trilhaId })}
             />
           )}
           {secao === 'conquistas' && <ConquistasScreen />}
