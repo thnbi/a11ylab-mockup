@@ -1,10 +1,13 @@
-import { useEffect, useRef } from 'react'
-import { X, Monitor, Sun, Moon, Type, Eye, Activity, BookOpenCheck, RotateCcw } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { X, Monitor, Sun, Moon, Type, Eye, Activity, BookOpenCheck, RotateCcw, Database, MapPin } from 'lucide-react'
 import { usePreferences } from '../contexts/PreferencesContext'
+import { useProgress } from '../contexts/ProgressContext'
 
-export default function PreferenciasDialog({ open, onClose }) {
+export default function PreferenciasDialog({ open, onClose, onRefazerTour }) {
   const dialogRef = useRef(null)
   const { prefs, update, reset } = usePreferences()
+  const { resetProgress } = useProgress()
+  const [confirmandoReset, setConfirmandoReset] = useState(false)
 
   // Sincroniza estado React com o <dialog> nativo
   useEffect(() => {
@@ -14,7 +17,7 @@ export default function PreferenciasDialog({ open, onClose }) {
     if (!open && dlg.open) dlg.close()
   }, [open])
 
-  // Fecha ao cancelar (Esc) — emite onClose para sincronizar estado React
+  // Fecha ao cancelar (Esc) - emite onClose para sincronizar estado React
   useEffect(() => {
     const dlg = dialogRef.current
     if (!dlg) return
@@ -76,6 +79,63 @@ export default function PreferenciasDialog({ open, onClose }) {
             checked={prefs.fonteDislexia}
             onChange={(v) => update({ fonteDislexia: v })}
           />
+
+          <section aria-labelledby="prefs-progresso" className="pt-2 border-t border-border">
+            <SectionHeader
+              Icon={Database}
+              id="prefs-progresso"
+              title="Progresso de aprendizado"
+              description="Zera trilhas concluídas, XP ganho e perguntas acertadas. Esta ação não pode ser desfeita."
+            />
+            {!confirmandoReset ? (
+              <button
+                type="button"
+                onClick={() => setConfirmandoReset(true)}
+                className="mt-2 inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-md border-2 border-border bg-surface-raised text-ink-muted hover:border-erro-500 hover:text-erro-700 text-label-md font-semibold transition-colors"
+              >
+                <RotateCcw size={16} strokeWidth={2.2} aria-hidden="true" />
+                Reiniciar progresso
+              </button>
+            ) : (
+              <div className="mt-2 flex items-center gap-2 flex-wrap" role="group" aria-label="Confirmar reinício de progresso">
+                <span className="text-label-md text-erro-700 font-semibold">Tem certeza?</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    resetProgress()
+                    setConfirmandoReset(false)
+                  }}
+                  className="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-md bg-erro-500 text-ink-on-dark text-label-md font-bold hover:bg-erro-700 transition-colors"
+                >
+                  Sim, zerar
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setConfirmandoReset(false)}
+                  className="min-h-11 px-3 py-2 rounded-md text-ink-muted hover:text-ink-strong hover:bg-surface-sunken text-label-md font-medium transition-colors"
+                >
+                  Cancelar
+                </button>
+              </div>
+            )}
+          </section>
+
+          <section aria-labelledby="prefs-tour" className="pt-2 border-t border-border">
+            <SectionHeader
+              Icon={MapPin}
+              id="prefs-tour"
+              title="Tour da plataforma"
+              description="Refaz a apresentação guiada das principais áreas do A11yLAB."
+            />
+            <button
+              type="button"
+              onClick={onRefazerTour}
+              className="mt-2 inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-md border-2 border-border bg-surface-raised text-ink-muted hover:border-dodger-500 hover:text-dodger-700 text-label-md font-semibold transition-colors"
+            >
+              <MapPin size={16} strokeWidth={2.2} aria-hidden="true" />
+              Refazer tour
+            </button>
+          </section>
         </div>
 
         <footer className="sticky bottom-0 bg-surface-raised border-t border-border px-6 py-4 flex items-center justify-between gap-3 flex-wrap">
@@ -110,7 +170,7 @@ const TEMAS = [
 function ThemeSection({ prefs, update }) {
   return (
     <section aria-labelledby="prefs-tema">
-      <SectionHeader Icon={Sun} id="prefs-tema" title="Tema visual" description="Modo claro reduz luz azul à noite — modo escuro reduz brilho geral." />
+      <SectionHeader Icon={Sun} id="prefs-tema" title="Tema visual" description="Modo claro reduz luz azul à noite, modo escuro reduz brilho geral." />
       <div role="radiogroup" aria-labelledby="prefs-tema" className="grid grid-cols-3 gap-2">
         {TEMAS.map(({ value, label, Icon }) => {
           const ativo = prefs.theme === value

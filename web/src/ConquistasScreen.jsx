@@ -10,8 +10,7 @@ import {
   Flame,
   BadgeCheck,
 } from 'lucide-react'
-
-const xpAtual = 1240
+import { useProgress } from './contexts/ProgressContext'
 
 const conquistasTrilhas = [
   {
@@ -19,7 +18,7 @@ const conquistasTrilhas = [
     nome: 'Fundamental',
     desc: 'Conclua "Fundamentos da Acessibilidade"',
     Icon: BadgeCheck,
-    unlocked: true,
+    trilhaId: 'fundamentos',
   },
   {
     id: 'wcag',
@@ -45,7 +44,7 @@ const conquistasTrilhas = [
   {
     id: 'moleza',
     nome: 'Moleza!',
-    desc: 'Conclua a Trilha 0 — Início',
+    desc: 'Conclua a Trilha 0 - Início',
     Icon: Trophy,
     unlocked: false,
   },
@@ -84,7 +83,15 @@ const conquistasPontuacao = [
 ]
 
 export default function ConquistasScreen() {
-  const totalUnlocked = conquistasTrilhas.filter((c) => c.unlocked).length
+  const { xp: xpAtual, getProgresoTrilha } = useProgress()
+  const conquistasComStatus = conquistasTrilhas.map((c) => {
+    if (c.trilhaId) {
+      const { concluidos, total } = getProgresoTrilha(c.trilhaId)
+      return { ...c, unlocked: total > 0 && concluidos === total }
+    }
+    return c
+  })
+  const totalUnlocked = conquistasComStatus.filter((c) => c.unlocked).length
   const proximaMedalha = conquistasPontuacao.find((m) => xpAtual < m.xp)
 
   return (
@@ -92,7 +99,7 @@ export default function ConquistasScreen() {
       <header className="mb-2">
         <h1 className="text-display text-ink-strong">Minhas conquistas</h1>
         <p className="mt-2 text-body-md text-ink-muted">
-          {totalUnlocked} de {conquistasTrilhas.length} conquistas de trilhas
+          {totalUnlocked} de {conquistasComStatus.length} conquistas de trilhas
           desbloqueadas
           {proximaMedalha && (
             <>
@@ -101,7 +108,7 @@ export default function ConquistasScreen() {
               <span className="text-ambar-700 font-semibold">
                 {proximaMedalha.nome}
               </span>{' '}
-              em {(proximaMedalha.xp - xpAtual).toLocaleString('pt-BR')} XP
+              em {(proximaMedalha.xp, xpAtual).toLocaleString('pt-BR')} XP
             </>
           )}
         </p>
@@ -110,7 +117,7 @@ export default function ConquistasScreen() {
       <section className="mt-8 mb-12">
         <h2 className="text-h2 text-ink-strong mb-5">Conquistas das trilhas</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {conquistasTrilhas.map((c) => (
+          {conquistasComStatus.map((c) => (
             <TrailBadge key={c.id} {...c} />
           ))}
         </div>

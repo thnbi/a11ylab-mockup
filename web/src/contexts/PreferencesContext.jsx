@@ -52,7 +52,7 @@ export function PreferencesProvider({ children }) {
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs))
     } catch {
-      // localStorage cheio ou bloqueado — segue em memória
+      // localStorage cheio ou bloqueado, segue em memória
     }
   }, [prefs])
 

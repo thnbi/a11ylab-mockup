@@ -2,16 +2,16 @@
 
 /* ============================================================
    Dark mode opt-in via classe `.dark` no <html>.
-   Sintaxe Tailwind v4 — `@custom-variant` registra o seletor.
+   Sintaxe Tailwind v4 - `@custom-variant` registra o seletor.
    ============================================================ */
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ============================================================
-   A11yLAB Design Tokens — derivados de /DESIGN.md (Dodger Estúdio)
+   A11yLAB Design Tokens, derivados de /DESIGN.md (Dodger Estúdio)
    Edite DESIGN.md primeiro, depois espelhe aqui.
 
    Os tamanhos de texto estão em rem para respeitarem o
-   font-size do <html> — habilita zoom de navegador e o
+   font-size do <html> - habilita zoom de navegador e o
    controle de tamanho de fonte do painel de Acessibilidade.
    Base: 1rem = 16px (light scale "padrão").
    ============================================================ */
@@ -21,7 +21,7 @@
   --font-display: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Consolas, monospace;
 
-  /* Colors — Dodger (primary, "ação") */
+  /* Colors, Dodger (primary, "ação") */
   --color-dodger-50: #EFF7FF;
   --color-dodger-100: #D9ECFF;
   --color-dodger-200: #B3D8FF;
@@ -33,7 +33,7 @@
   --color-dodger-800: #0B4180;
   --color-dodger-900: #072C5C;
 
-  /* Colors — Violeta (secondary, "progresso") */
+  /* Colors, Violeta (secondary, "progresso") */
   --color-violeta-50: #F5F0FF;
   --color-violeta-100: #EADDFF;
   --color-violeta-200: #D4BAFF;
@@ -45,33 +45,33 @@
   --color-violeta-800: #3F1880;
   --color-violeta-900: #2A1057;
 
-  /* Colors — Âmbar (XP / recompensa) */
+  /* Colors, Âmbar (XP / recompensa) */
   --color-ambar-50: #FFF8E6;
   --color-ambar-100: #FDECC8;
   --color-ambar-300: #FBC56B;
   --color-ambar-500: #F59E0B;
   --color-ambar-700: #B97509;
 
-  /* Colors — Teal (acento secundário) */
+  /* Colors, Teal (acento secundário) */
   --color-teal-50: #E6FAF7;
   --color-teal-100: #C4F1EA;
   --color-teal-500: #14B8A6;
   --color-teal-700: #0E8175;
 
-  /* Colors — Sucesso */
+  /* Colors, Sucesso */
   --color-sucesso-50: #E6F8F1;
   --color-sucesso-100: #C7EFDD;
   --color-sucesso-200: #9CE0C0;
   --color-sucesso-500: #10B981;
   --color-sucesso-700: #0B7F5A;
 
-  /* Colors — Erro */
+  /* Colors, Erro */
   --color-erro-50: #FDECEC;
   --color-erro-100: #FAD0D0;
   --color-erro-500: #EF4444;
   --color-erro-700: #B5292A;
 
-  /* Colors — Superfície e texto */
+  /* Colors, Superfície e texto */
   --color-surface: #FAFCFF;
   --color-surface-raised: #FFFFFF;
   --color-surface-sunken: #F1F5FB;
@@ -84,7 +84,7 @@
   --color-border: #E2E8F0;
   --color-border-strong: #CBD5E1;
 
-  /* Colors — Apelidos semânticos */
+  /* Colors, Apelidos semânticos */
   --color-primary: #1E90FF;
   --color-primary-hover: #1573D6;
   --color-secondary: #7C3AED;
@@ -102,7 +102,7 @@
   --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
   --shadow-lg: 0 10px 24px rgba(15, 23, 42, 0.10);
 
-  /* Typography — sizes em rem (escalam com font-size do html) */
+  /* Typography, sizes em rem (escalam com font-size do html) */
   --text-display: 2.5rem;          /* 40px */
   --text-display--line-height: 1.15;
   --text-display--letter-spacing: -0.02em;
@@ -147,13 +147,13 @@
 }
 
 /* ============================================================
-   Dark mode — espelhamento da escala de cores.
+   Dark mode, espelhamento da escala de cores.
    Sobrescreve as CSS vars do @theme quando .dark está no <html>.
    Estratégia: cada shade -N vira o shade -(1000-N) da escala
    original, mantendo coerência tonal. Surface invertida.
    ============================================================ */
 .dark {
-  /* Dodger — espelhada */
+  /* Dodger, espelhada */
   --color-dodger-50: #072C5C;
   --color-dodger-100: #0B4180;
   --color-dodger-200: #0F58A8;
@@ -165,7 +165,7 @@
   --color-dodger-800: #B3D8FF;
   --color-dodger-900: #D9ECFF;
 
-  /* Violeta — espelhada */
+  /* Violeta, espelhada */
   --color-violeta-50: #2A1057;
   --color-violeta-100: #3F1880;
   --color-violeta-200: #5520A8;
@@ -177,7 +177,7 @@
   --color-violeta-800: #D4BAFF;
   --color-violeta-900: #EADDFF;
 
-  /* Âmbar — calibrada manual (escala curta) */
+  /* Âmbar, calibrada manual (escala curta) */
   --color-ambar-50: #2D1F08;
   --color-ambar-100: #4D3510;
   --color-ambar-300: #B97509;
@@ -203,7 +203,7 @@
   --color-erro-500: #EF4444;
   --color-erro-700: #FCA5A5;
 
-  /* Surface e texto — invertidos */
+  /* Surface e texto, invertidos */
   --color-surface: #0B1424;
   --color-surface-raised: #131F36;
   --color-surface-sunken: #060D1A;
@@ -212,18 +212,18 @@
   --color-ink-muted: #A3B0C2;       /* mais claro que slate-400 para AA sobre raised */
   --color-ink-subtle: #94A3B8;
   --color-ink-disabled: #64748B;
-  --color-ink-on-dark: #F8FAFC;     /* texto sobre botão primário (-500) — sempre claro */
+  --color-ink-on-dark: #F8FAFC;     /* texto sobre botão primário (-500) - sempre claro */
   --color-border: #1E293B;
   --color-border-strong: #334155;
 
-  /* Sombras em dark — mais sutis (já há contraste por luminância) */
+  /* Sombras em dark, mais sutis (já há contraste por luminância) */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.45);
 }
 
 /* ============================================================
-   data-contrast="alto" — modo de contraste reforçado
+   data-contrast="alto" - modo de contraste reforçado
    Texto secundário vira igual ao texto forte; bordas ganham
    intensidade; remove transparências sutis.
    ============================================================ */
@@ -235,7 +235,7 @@
 }
 
 /* ============================================================
-   data-font-scale — controle de tamanho de fonte
+   data-font-scale, controle de tamanho de fonte
    Todos os tokens de texto estão em rem, então alterar
    o font-size raiz escala a UI inteira proporcionalmente.
    ============================================================ */
@@ -245,7 +245,7 @@
 :root[data-font-scale="3"] { font-size: 125%; }    /* Maior (20px) */
 
 /* ============================================================
-   data-reduce-motion="forcar" — override do usuário, ignora OS
+   data-reduce-motion="forcar" - override do usuário, ignora OS
    ============================================================ */
 :root[data-reduce-motion="forcar"] *,
 :root[data-reduce-motion="forcar"] *::before,
@@ -255,7 +255,7 @@
 }
 
 /* ============================================================
-   data-font="dislexia" — substitui família por Atkinson
+   data-font="dislexia" - substitui família por Atkinson
    Hyperlegible, otimizada para baixa visão.
    ============================================================ */
 :root[data-font="dislexia"] {
@@ -287,7 +287,7 @@
     color: var(--color-ink-strong);
   }
 
-  /* Focus ring obrigatório (WCAG 2.4.7) — a plataforma ensina isso, então a UI exemplifica */
+  /* Focus ring obrigatório (WCAG 2.4.7) - a plataforma ensina isso, então a UI exemplifica */
   *:focus-visible {
     outline: 3px solid var(--color-dodger-500);
     outline-offset: 2px;
@@ -303,7 +303,7 @@
   }
 
   /* Cursor pointer em todos os elementos interativos.
-     Tailwind v4 removeu o cursor: pointer default em <button> — restauramos
+     Tailwind v4 removeu o cursor: pointer default em <button> - restauramos
      para a UI inteira em vez de espalhar a classe em cada componente. */
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -348,5 +348,172 @@
   dialog::backdrop {
     background-color: rgba(11, 20, 36, 0.55);
     backdrop-filter: blur(2px);
+  }
+}
+
+/* ============================================================
+   Animações customizadas, gamificação
+   `prefers-reduced-motion` é honrado pelo bloco @media acima,
+   que zera animation-duration globalmente.
+   ============================================================ */
+
+/* Coração "quebrando" ao perder uma vida, scale-pop com leve
+   rotação, depois encolhe e some, revelando o coração vazio. */
+@keyframes heart-break {
+  0%   { transform: scale(1)   rotate(0); opacity: 1; }
+  20%  { transform: scale(1.4) rotate(-12deg); }
+  45%  { transform: scale(1.2) rotate(12deg); }
+  70%  { transform: scale(1.1) rotate(0);   opacity: 0.7; }
+  100% { transform: scale(0)   rotate(0);   opacity: 0; }
+}
+.animate-heart-break {
+  animation: heart-break 0.7s ease-out forwards;
+}
+
+/* XP burst, pílula que aparece, expande, sobe e desvanece.
+   Usado como overlay flutuante ao acertar uma pergunta. */
+@keyframes xp-burst {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(30px) scale(0.4); }
+  18%  { opacity: 1; transform: translateX(-50%) translateY(0)    scale(1.18); }
+  35%  {              transform: translateX(-50%) translateY(-8px) scale(1); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-120px) scale(0.95); }
+}
+.animate-xp-burst {
+  animation: xp-burst 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Pop-in genérico, entrada com leve overshoot. Aplicado em
+   elementos que devem chamar atenção ao aparecer (XP tag no
+   feedback, distintivos de combo). */
+@keyframes pop-in {
+  0%   { opacity: 0; transform: scale(0.4); }
+  60%  { opacity: 1; transform: scale(1.15); }
+  80%  {              transform: scale(0.95); }
+  100% {              transform: scale(1); }
+}
+.animate-pop-in {
+  animation: pop-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Pulse do contador de XP, chama atenção quando o valor sobe. */
+@keyframes xp-counter-pulse {
+  0%   { transform: scale(1);    color: var(--color-ink-strong); }
+  35%  { transform: scale(1.18); color: var(--color-ambar-700); }
+  100% { transform: scale(1);    color: var(--color-ink-strong); }
+}
+.animate-xp-pulse {
+  animation: xp-counter-pulse 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+   Overrides para driver.js, combina o popover do tour com
+   a paleta Dodger Estúdio (DESIGN.md).
+   `!important` é necessário em algumas regras porque o CSS
+   nativo do driver.js usa especificidade alta para set width.
+   ============================================================ */
+.driver-popover {
+  background-color: var(--color-surface-raised) !important;
+  color: var(--color-ink) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border: 1px solid var(--color-border) !important;
+  font-family: var(--font-sans) !important;
+  min-width: 340px !important;
+  max-width: 460px !important;
+  width: max-content !important;
+  padding: 20px 22px !important;
+}
+/* Setas precisam apontar para a cor de fundo do popover */
+.driver-popover-arrow-side-left.driver-popover-arrow { border-left-color: var(--color-surface-raised) !important; }
+.driver-popover-arrow-side-right.driver-popover-arrow { border-right-color: var(--color-surface-raised) !important; }
+.driver-popover-arrow-side-top.driver-popover-arrow { border-top-color: var(--color-surface-raised) !important; }
+.driver-popover-arrow-side-bottom.driver-popover-arrow { border-bottom-color: var(--color-surface-raised) !important; }
+
+.driver-popover-title {
+  color: var(--color-ink-strong) !important;
+  font-family: var(--font-display) !important;
+  font-size: var(--text-h3) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.3 !important;
+  margin: 0 0 8px !important;
+  padding-right: 28px; /* respiro pra não chocar com o X */
+}
+
+.driver-popover-description {
+  color: var(--color-ink) !important;
+  font-size: var(--text-body-md) !important;
+  line-height: 1.55 !important;
+  margin: 0 0 16px !important;
+}
+.driver-popover-description strong {
+  color: var(--color-ink-strong) !important;
+  font-weight: 700;
+}
+
+.driver-popover-progress-text {
+  color: var(--color-ink-muted) !important;
+  font-size: var(--text-caps) !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+  white-space: nowrap;
+}
+
+.driver-popover-footer {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin-top: 4px !important;
+}
+.driver-popover-navigation-btns {
+  display: flex !important;
+  gap: 8px !important;
+  flex-shrink: 0 !important;
+}
+.driver-popover-footer button.driver-popover-prev-btn,
+.driver-popover-footer button.driver-popover-next-btn {
+  border-radius: var(--radius-md) !important;
+  padding: 10px 16px !important;
+  font-weight: 700 !important;
+  font-size: var(--text-label-md) !important;
+  text-shadow: none !important;
+  border: none !important;
+  background-image: none !important;
+  min-height: 40px;
+  white-space: nowrap;
+}
+.driver-popover-footer button.driver-popover-next-btn {
+  background-color: var(--color-dodger-500) !important;
+  color: var(--color-ink-on-dark) !important;
+}
+.driver-popover-footer button.driver-popover-next-btn:hover {
+  background-color: var(--color-dodger-600) !important;
+}
+.driver-popover-footer button.driver-popover-prev-btn {
+  background-color: transparent !important;
+  color: var(--color-ink-muted) !important;
+}
+.driver-popover-footer button.driver-popover-prev-btn:hover {
+  color: var(--color-ink-strong) !important;
+  background-color: var(--color-surface-sunken) !important;
+}
+.driver-popover-close-btn {
+  color: var(--color-ink-muted) !important;
+  font-size: 22px !important;
+  top: 12px !important;
+  right: 14px !important;
+}
+.driver-popover-close-btn:hover {
+  color: var(--color-ink-strong) !important;
+}
+
+/* Mobile: respeita a viewport */
+@media (max-width: 480px) {
+  .driver-popover {
+    min-width: 0 !important;
+    max-width: calc(100vw - 32px) !important;
+    width: calc(100vw - 32px) !important;
   }
 }
