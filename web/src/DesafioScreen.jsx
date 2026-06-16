@@ -62,7 +62,7 @@ export default function DesafioScreen({
   if (!desafio || !trilha) {
     return (
       <div className="max-w-[1200px] mx-auto px-10 py-8">
-        <BackLink onClick={onVoltarTrilha}>Voltar para a trilha</BackLink>
+        <BackLink onClick={onVoltarTrilha} className='hover:bg-violet-200 rounded-2xl p-1 pr-2'>Voltar para a trilha</BackLink>
         <p className="mt-8 text-body-md text-ink-muted">
           Desafio "{desafioId}" não encontrado.
         </p>
@@ -147,7 +147,7 @@ export default function DesafioScreen({
     <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-6 lg:py-8">
       {/* Linha 1: back-link à esquerda, corações à direita (alinhados) */}
       <div className="flex items-center justify-between gap-4 mb-3">
-        <BackLink onClick={onVoltarTrilha}>Voltar para a trilha</BackLink>
+        <BackLink onClick={onVoltarTrilha} className='hover:bg-violet-200 rounded-2xl p-1 pr-2'>Voltar para a trilha</BackLink>
         <Vidas vidas={vidas} />
       </div>
 

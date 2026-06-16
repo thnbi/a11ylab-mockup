@@ -26,7 +26,7 @@ export default function AulaScreen({
   if (!aula) {
     return (
       <div className="max-w-[820px] mx-auto px-10 py-8">
-        <BackLink onClick={onVoltarTrilha}>Voltar para a trilha</BackLink>
+        <BackLink onClick={onVoltarTrilha} className='hover:bg-violet-200 rounded-2xl p-1 pr-2'>Voltar para a trilha</BackLink>
         <p className="mt-8 text-body-md text-ink-muted">
           Aula "{aulaId}" não encontrada.
         </p>
@@ -50,7 +50,7 @@ export default function AulaScreen({
 
   return (
     <div className="max-w-[820px] mx-auto px-10 py-8">
-      <BackLink onClick={onVoltarTrilha} className="mb-4">
+      <BackLink onClick={onVoltarTrilha} className="mb-4 hover:bg-violet-200 rounded-2xl p-1 pr-2">
         Voltar para a trilha
       </BackLink>
 

@@ -71,7 +71,7 @@ export default function TrilhaScreen({
   return (
     <div className="max-w-[1200px] mx-auto px-10 py-8">
       {onVoltarRoadmap && (
-        <BackLink onClick={onVoltarRoadmap} className="mb-4">
+        <BackLink onClick={onVoltarRoadmap} className="mb-4 hover:bg-violet-200 rounded-2xl p-1 pr-2">
           Voltar ao roadmap
         </BackLink>
       )}

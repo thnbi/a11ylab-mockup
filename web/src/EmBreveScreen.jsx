@@ -32,7 +32,7 @@ export default function EmBreveScreen({
 
   return (
     <div className="max-w-[800px] mx-auto px-6 py-10">
-      <BackLink onClick={onVoltarRoadmap} className="mb-6">
+      <BackLink onClick={onVoltarRoadmap} className="mb-6 hover:bg-violet-200 rounded-2xl p-1 pr-2">
         Voltar ao roadmap
       </BackLink>
 
