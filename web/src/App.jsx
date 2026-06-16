@@ -12,6 +12,7 @@ import SkipLink from './components/SkipLink'
 import PreferenciasDialog from './components/PreferenciasDialog'
 import TourGuide from './components/TourGuide'
 import { useAuth } from './contexts/AuthContext'
+import { SurveyProvider } from './contexts/SurveyContext'
 
 export default function App() {
   const { user } = useAuth()
@@ -28,7 +29,7 @@ export default function App() {
   }
 
   return (
-    <>
+    <SurveyProvider>
       <SkipLink />
       <div className="h-dvh flex bg-surface overflow-hidden">
         <Sidebar
@@ -110,6 +111,6 @@ export default function App() {
         startSignal={tourStartKey}
         onIrPara={(s) => handleSecaoChange(s)}
       />
-    </>
+    </SurveyProvider>
   )
 }
