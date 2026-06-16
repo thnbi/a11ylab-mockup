@@ -11,6 +11,8 @@ import {
 import { getTrilha, totalDesafios, getAulasTrilha } from './data/helpers'
 import { xpTotalTrilha } from './data/trilhas'
 import { useProgress } from './contexts/ProgressContext'
+import { useSurvey } from './contexts/SurveyContext'
+import NpsCard from './components/surveys/NpsCard'
 import { BackLink, ProgressBar, Tag } from './components/ui'
 
 /* ============================================================
@@ -43,6 +45,7 @@ export default function TrilhaScreen({
   const total = totalDesafios(trilhaId)
   const xpTotal = xpTotalTrilha(trilha)
   const trilhaCompleta = concluidos === total
+  const { shouldShowNps } = useSurvey()
 
   const aulas = getAulasTrilha(trilhaId)
   const aulaPorDesafio = Object.fromEntries(
@@ -109,6 +112,12 @@ export default function TrilhaScreen({
         bonusFinal={trilha.bonusFinal}
         trilhaCompleta={trilhaCompleta}
       />
+
+      {trilhaCompleta && shouldShowNps() && (
+        <div className="mt-8">
+          <NpsCard />
+        </div>
+      )}
     </div>
   )
 }
