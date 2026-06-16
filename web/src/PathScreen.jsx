@@ -383,15 +383,10 @@ function variantPorStatus(status) {
 function NodeStatusRow({ status, progresso }) {
   if (status === 'em-andamento') {
     return (
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex items-center gap-2">
         <Tag tone="ambar" size="sm" icon={Sparkles}>
           Você está aqui
         </Tag>
-        {progresso && (
-          <span className="text-label-sm font-bold text-ambar-700">
-            {progresso.concluidos}/{progresso.total} desafios
-          </span>
-        )}
       </div>
     )
   }
@@ -539,14 +534,14 @@ function HoverTooltip({ trilha }) {
       aria-hidden="true"
       className="absolute left-1/2 -translate-x-1/2 top-full mt-2 z-10 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-events-none transition-opacity"
     >
-      <div className="rounded-md bg-ink-strong text-ink-on-dark px-3 py-2 shadow-lg text-label-sm whitespace-nowrap flex items-center gap-3">
+      <div className="rounded-md bg-ink-strong dark:bg-surface-sunken dark:border dark:border-border-strong text-ink-on-dark dark:text-ink-strong px-3 py-2 shadow-lg text-label-sm whitespace-nowrap flex items-center gap-3">
         <span>{totalDesafios} desafios</span>
-        <span className="opacity-60">•</span>
+        <span className="opacity-40">•</span>
         <span className="inline-flex items-center gap-1">
           <Clock size={12} aria-hidden="true" />~{trilha.duracaoMin} min
         </span>
-        <span className="opacity-60">•</span>
-        <span className="inline-flex items-center gap-1 text-ambar-300">
+        <span className="opacity-40">•</span>
+        <span className="inline-flex items-center gap-1 text-ambar-300 dark:text-ambar-700">
           <Zap size={12} strokeWidth={2.5} fill="currentColor" aria-hidden="true" />
           {xpTotal} XP
         </span>

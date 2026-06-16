@@ -153,17 +153,17 @@
    original, mantendo coerência tonal. Surface invertida.
    ============================================================ */
 .dark {
-  /* Dodger, espelhada */
-  --color-dodger-50: #072C5C;
-  --color-dodger-100: #0B4180;
-  --color-dodger-200: #0F58A8;
-  --color-dodger-300: #1573D6;
-  --color-dodger-400: #46A4FF;
-  --color-dodger-500: #1E90FF;
-  --color-dodger-600: #46A4FF;
-  --color-dodger-700: #7CBEFF;
-  --color-dodger-800: #B3D8FF;
-  --color-dodger-900: #D9ECFF;
+  /* Dodger, paleta reequilibrada — periwinkle muted, sem neon */
+  --color-dodger-50:  #0D1829;
+  --color-dodger-100: #122041;
+  --color-dodger-200: #1A3360;
+  --color-dodger-300: #254D8E;
+  --color-dodger-400: #3E6CC4;
+  --color-dodger-500: #5B8CE8;
+  --color-dodger-600: #7BAAF0;
+  --color-dodger-700: #9DC3F6;
+  --color-dodger-800: #BDD8FA;
+  --color-dodger-900: #DEEEFF;
 
   /* Violeta, espelhada */
   --color-violeta-50: #2A1057;
@@ -203,18 +203,18 @@
   --color-erro-500: #EF4444;
   --color-erro-700: #FCA5A5;
 
-  /* Surface e texto, invertidos */
-  --color-surface: #0B1424;
-  --color-surface-raised: #131F36;
-  --color-surface-sunken: #060D1A;
-  --color-ink: #E2E8F0;
-  --color-ink-strong: #F8FAFC;
-  --color-ink-muted: #A3B0C2;       /* mais claro que slate-400 para AA sobre raised */
-  --color-ink-subtle: #94A3B8;
-  --color-ink-disabled: #64748B;
-  --color-ink-on-dark: #F8FAFC;     /* texto sobre botão primário (-500) - sempre claro */
-  --color-border: #1E293B;
-  --color-border-strong: #334155;
+  /* Surface e texto — tons neutros estilo Discord, menos navy saturado */
+  --color-surface:        #17191E;
+  --color-surface-raised: #21232A;
+  --color-surface-sunken: #0E1013;
+  --color-ink: #D8DCE3;
+  --color-ink-strong: #F0F2F5;
+  --color-ink-muted: #9AA1AE;
+  --color-ink-subtle: #6B7280;
+  --color-ink-disabled: #4B5563;
+  --color-ink-on-dark: #0B1424;
+  --color-border:         #2C2F3A;
+  --color-border-strong:  #3A3E4C;
 
   /* Sombras em dark, mais sutis (já há contraste por luminância) */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
