@@ -15,6 +15,8 @@ import { useProgress } from './contexts/ProgressContext'
 import { useAuth } from './contexts/AuthContext'
 import { getTrilha } from './data/helpers'
 import { Tag } from './components/ui'
+import { useSurvey } from './contexts/SurveyContext'
+import NpsCard from './components/surveys/NpsCard'
 
 /* ============================================================
    Home / Roadmap, A11yLAB
@@ -88,6 +90,8 @@ function primeiroNome(nome) {
 
 export default function PathScreen({ onAbrirTrilha, onAbrirEmBreve }) {
   const [q, setQ] = useState('')
+  const { shouldShowNpsSession } = useSurvey()
+  const showNpsSession = !q && shouldShowNpsSession()
 
   const queryNorm = normalizar(q.trim())
 
@@ -151,6 +155,12 @@ export default function PathScreen({ onAbrirTrilha, onAbrirEmBreve }) {
             onAbrirEmBreve={onAbrirEmBreve}
           />
         </>
+      )}
+
+      {showNpsSession && (
+        <div className="mt-10">
+          <NpsCard />
+        </div>
       )}
     </div>
   )
