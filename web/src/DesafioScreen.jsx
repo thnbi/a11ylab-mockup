@@ -363,17 +363,16 @@ function Pergunta({ pergunta, selected, confirmed, onSelect, onConfirm }) {
   return (
     <section className="bg-surface-raised border border-border rounded-lg p-6 flex flex-col">
       <h2 className="text-h2 text-ink-strong mb-5">{pergunta.enunciado}</h2>
-      <ul className="space-y-3 flex-1" role="radiogroup" aria-label="Opções de resposta">
+      <div className="space-y-3 flex-1" role="radiogroup" aria-label="Opções de resposta">
         {pergunta.opcoes.map((op) => (
-          <li key={op.id}>
-            <OptionCard
-              opcao={op}
-              estado={getEstado(op.id, selected, confirmed, pergunta.respostaCorreta)}
-              onClick={() => !confirmed && onSelect(op.id)}
-            />
-          </li>
+          <OptionCard
+            key={op.id}
+            opcao={op}
+            estado={getEstado(op.id, selected, confirmed, pergunta.respostaCorreta)}
+            onClick={() => !confirmed && onSelect(op.id)}
+          />
         ))}
-      </ul>
+      </div>
       {!confirmed && (
         <Button
           variant="primary"

@@ -410,7 +410,14 @@ function TrilhaHistoryCard({ titulo, status, completos, total, ultimoAcesso }) {
           {completos} de {total} desafios{' '}
           <span className="text-ink-disabled">•</span> último acesso {ultimoAcesso}
         </p>
-        <div className="mt-3 h-1.5 bg-surface-sunken rounded-full overflow-hidden max-w-md">
+        <div
+          role="progressbar"
+          aria-valuenow={percent}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label={`Progresso em ${titulo}`}
+          className="mt-3 h-1.5 bg-surface-sunken rounded-full overflow-hidden max-w-md"
+        >
           <div
             className={`h-full rounded-full ${
               concluido ? 'bg-sucesso-500' : 'bg-violeta-500'

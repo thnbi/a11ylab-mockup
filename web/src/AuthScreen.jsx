@@ -41,6 +41,7 @@ export default function AuthScreen() {
             className="grid grid-cols-2 border-b border-border"
           >
             <ModoTab
+              id="tab-login"
               ativo={modo === 'login'}
               onClick={() => setModo('login')}
               controls="auth-form"
@@ -48,6 +49,7 @@ export default function AuthScreen() {
               Entrar
             </ModoTab>
             <ModoTab
+              id="tab-cadastro"
               ativo={modo === 'cadastro'}
               onClick={() => setModo('cadastro')}
               controls="auth-form"
@@ -56,7 +58,12 @@ export default function AuthScreen() {
             </ModoTab>
           </div>
 
-          <div id="auth-form" className="p-6">
+          <div
+            id="auth-form"
+            role="tabpanel"
+            aria-labelledby={modo === 'login' ? 'tab-login' : 'tab-cadastro'}
+            className="p-6"
+          >
             {modo === 'login' ? (
               <LoginForm onTrocarPraCadastro={() => setModo('cadastro')} />
             ) : (
@@ -74,9 +81,10 @@ export default function AuthScreen() {
   )
 }
 
-function ModoTab({ ativo, onClick, controls, children }) {
+function ModoTab({ id, ativo, onClick, controls, children }) {
   return (
     <button
+      id={id}
       type="button"
       role="tab"
       aria-selected={ativo}

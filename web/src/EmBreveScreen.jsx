@@ -64,7 +64,7 @@ export default function EmBreveScreen({
           role="status"
         >
           <p className="text-body-md text-violeta-700 font-semibold">
-            Tô preparando essa trilha com carinho. 💛
+            Tô preparando essa trilha com carinho. <span aria-hidden="true">💛</span>
           </p>
           <p className="mt-1 text-body-sm text-ink-muted">
             Logo, logo ela vai estar cheia de desafios interativos por aqui.

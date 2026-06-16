@@ -12,6 +12,7 @@ const CARD_STYLES = {
     'bg-surface-sunken border-transparent text-ink hover:border-dodger-200 hover:bg-dodger-50/50',
   selected: 'bg-dodger-50 border-dodger-500 text-dodger-700 font-semibold',
   correct: 'bg-sucesso-50 border-sucesso-500 text-sucesso-700 font-semibold',
+  'correct-highlight': 'bg-sucesso-50 border-sucesso-500 text-sucesso-700 font-semibold',
   wrong: 'bg-erro-50 border-erro-500 text-erro-700 font-semibold',
   dimmed: 'bg-surface-sunken border-transparent text-ink-muted opacity-60',
 }
@@ -20,12 +21,15 @@ const LETTER_STYLES = {
   default: 'bg-surface-raised border border-border text-ink-muted',
   selected: 'bg-dodger-500 text-white',
   correct: 'bg-sucesso-500 text-white',
+  'correct-highlight': 'bg-sucesso-500 text-white',
   wrong: 'bg-erro-500 text-white',
   dimmed: 'bg-surface-raised border border-border text-ink-disabled',
 }
 
 export default function OptionCard({ opcao, estado, onClick }) {
   const interactive = estado === 'default' || estado === 'selected'
+  // 'correct-highlight' = right answer not chosen by user; must NOT be aria-checked=true
+  // to avoid two radios checked simultaneously in the group
   const checked = estado === 'selected' || estado === 'correct' || estado === 'wrong'
 
   return (
@@ -48,7 +52,7 @@ export default function OptionCard({ opcao, estado, onClick }) {
           LETTER_STYLES[estado],
         ].join(' ')}
       >
-        {estado === 'correct' ? (
+        {estado === 'correct' || estado === 'correct-highlight' ? (
           <CheckCircle2 size={20} strokeWidth={2.5} />
         ) : estado === 'wrong' ? (
           <XCircle size={20} strokeWidth={2.5} />
@@ -56,7 +60,12 @@ export default function OptionCard({ opcao, estado, onClick }) {
           opcao.id
         )}
       </span>
-      <span className="text-body-md flex-1">{opcao.texto}</span>
+      <span className="text-body-md flex-1">
+        {opcao.texto}
+        {estado === 'correct-highlight' && (
+          <span className="sr-only"> (resposta correta)</span>
+        )}
+      </span>
     </button>
   )
 }
@@ -65,7 +74,8 @@ export function getEstado(id, selected, confirmed, respostaCorreta) {
   if (!confirmed) {
     return selected === id ? 'selected' : 'default'
   }
-  if (id === respostaCorreta) return 'correct'
+  if (id === respostaCorreta && id === selected) return 'correct'
+  if (id === respostaCorreta) return 'correct-highlight'
   if (id === selected) return 'wrong'
   return 'dimmed'
 }
