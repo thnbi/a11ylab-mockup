@@ -366,7 +366,7 @@ function variantPorStatus(status) {
   }
   if (status === 'em-andamento') return {
     bg: 'bg-ambar-50', border: 'border-ambar-500',
-    ring: 'ring-4 ring-ambar-500/20 lg:motion-safe:animate-pulse',
+    ring: 'ring-4 ring-ambar-500/20',
     title: 'text-ink-strong', sub: 'text-ink-muted',
   }
   if (status === 'em-breve') return {

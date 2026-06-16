@@ -153,70 +153,70 @@
    original, mantendo coerência tonal. Surface invertida.
    ============================================================ */
 .dark {
-  /* Dodger, paleta reequilibrada — periwinkle muted, sem neon */
+  /* Dodger — azul slate muted, sem neon */
   --color-dodger-50:  #0D1829;
   --color-dodger-100: #122041;
   --color-dodger-200: #1A3360;
   --color-dodger-300: #254D8E;
   --color-dodger-400: #3E6CC4;
-  --color-dodger-500: #5B8CE8;
-  --color-dodger-600: #7BAAF0;
-  --color-dodger-700: #9DC3F6;
+  --color-dodger-500: #5182C8;
+  --color-dodger-600: #6D9AD4;
+  --color-dodger-700: #92B8E3;
   --color-dodger-800: #BDD8FA;
   --color-dodger-900: #DEEEFF;
 
-  /* Violeta, espelhada */
-  --color-violeta-50: #2A1057;
-  --color-violeta-100: #3F1880;
-  --color-violeta-200: #5520A8;
-  --color-violeta-300: #6A2BD1;
-  --color-violeta-400: #9A6FF0;
-  --color-violeta-500: #7C3AED;
-  --color-violeta-600: #9A6FF0;
-  --color-violeta-700: #B895FA;
-  --color-violeta-800: #D4BAFF;
-  --color-violeta-900: #EADDFF;
+  /* Violeta — roxo slate muted (sem override = ficava #7C3AED neon) */
+  --color-violeta-50:  #1C0E42;
+  --color-violeta-100: #2D1863;
+  --color-violeta-200: #42288D;
+  --color-violeta-300: #5B3FAE;
+  --color-violeta-400: #7558C4;
+  --color-violeta-500: #9473CA;
+  --color-violeta-600: #A785D4;
+  --color-violeta-700: #BEA1E0;
+  --color-violeta-800: #D4C0EE;
+  --color-violeta-900: #EBE0F8;
 
-  /* Âmbar, calibrada manual (escala curta) */
-  --color-ambar-50: #2D1F08;
+  /* Âmbar — dourado muted (sem override = ficava #F59E0B neon) */
+  --color-ambar-50:  #2D1F08;
   --color-ambar-100: #4D3510;
-  --color-ambar-300: #B97509;
-  --color-ambar-500: #F59E0B;
-  --color-ambar-700: #FBC56B;
+  --color-ambar-300: #996B0E;
+  --color-ambar-500: #C98C1E;
+  --color-ambar-700: #E8B252;
 
   /* Teal */
-  --color-teal-50: #062A26;
+  --color-teal-50:  #062A26;
   --color-teal-100: #093F39;
-  --color-teal-500: #14B8A6;
-  --color-teal-700: #5EEAD4;
+  --color-teal-500: #1AAB9A;
+  --color-teal-700: #5AC8B8;
 
-  /* Sucesso */
-  --color-sucesso-50: #07291E;
-  --color-sucesso-100: #0B3F2E;
-  --color-sucesso-200: #0F5640;
-  --color-sucesso-500: #10B981;
-  --color-sucesso-700: #6EE7B7;
+  /* Sucesso — verde sage muted (sem override = ficava #10B981 neon) */
+  --color-sucesso-50:  #071D14;
+  --color-sucesso-100: #0C2E1F;
+  --color-sucesso-200: #103D2A;
+  --color-sucesso-500: #2F9E72;
+  --color-sucesso-700: #6EC9A8;
 
-  /* Erro */
-  --color-erro-50: #2D0E0E;
+  /* Erro — vermelho muted */
+  --color-erro-50:  #2D0E0E;
   --color-erro-100: #4D1A1A;
-  --color-erro-500: #EF4444;
-  --color-erro-700: #FCA5A5;
+  --color-erro-500: #D44444;
+  --color-erro-700: #E89090;
 
-  /* Surface e texto — tons neutros estilo Discord, menos navy saturado */
+  /* Superfície e texto — tons neutros estilo Discord, menos navy saturado */
   --color-surface:        #17191E;
   --color-surface-raised: #21232A;
   --color-surface-sunken: #0E1013;
-  --color-ink: #D8DCE3;
-  --color-ink-strong: #F0F2F5;
-  --color-ink-muted: #9AA1AE;
-  --color-ink-subtle: #6B7280;
-  --color-ink-disabled: #4B5563;
-  --color-ink-on-dark: #0B1424;
+  --color-ink:            #D8DCE3;
+  --color-ink-strong:     #F0F2F5;
+  --color-ink-muted:      #9AA1AE;
+  --color-ink-subtle:     #6B7280;
+  --color-ink-disabled:   #4B5563;
+  --color-ink-on-dark:    #0B1424;
   --color-border:         #2C2F3A;
   --color-border-strong:  #3A3E4C;
 
-  /* Sombras em dark, mais sutis (já há contraste por luminância) */
+  /* Sombras em dark, mais sutis */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.45);
