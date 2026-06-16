@@ -14,6 +14,8 @@ import {
 import { getDesafio, getProximoDesafio, getTrilha } from './data/helpers'
 import { Evidencia } from './data/evidencias'
 import { useProgress } from './contexts/ProgressContext'
+import { useSurvey } from './contexts/SurveyContext'
+import CsatCard from './components/surveys/CsatCard'
 import { BackLink, Button, OptionCard, getEstado, Tag, ProgressBar } from './components/ui'
 
 /* ============================================================
@@ -591,6 +593,7 @@ function TelaConclusao({
 }) {
   const aproveitamento = total === 0 ? 0 : (acertos / total) * 100
   const perfeito = acertos === total
+  const { shouldShowCsat } = useSurvey()
   const titulo = perfeito
     ? 'Desafio dominado!'
     : acertos >= total / 2
@@ -644,6 +647,10 @@ function TelaConclusao({
           <span className="text-h3 font-bold text-ambar-700">+{xpGanho} XP</span>
           <span className="text-label-md text-ink-muted">ganhos neste desafio</span>
         </div>
+
+        {shouldShowCsat(desafio.id) && (
+          <CsatCard desafioId={desafio.id} />
+        )}
 
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
           <Button variant="secondary" iconLeft={Compass} onClick={onVoltarTrilha}>
